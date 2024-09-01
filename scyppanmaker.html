@@ -1,0 +1,455 @@
+<div id="UICONTAINER">
+    
+        <div id="TopMenu">
+        
+            <div id="topmenu-left"><input type="file" id="loadbtn" style="display:flex;" onchange="loadjson()" accept=".json"><button id="savebtn" onclick="downloadsmjson()" style="display:none">Save SM23JSON</button>&nbsp;&nbsp;&nbsp;&nbsp;<button id="leaguebtn" class="selectedbtn" onclick="topmenubtnpressed('leagues')" style="display:none;">League View</button>
+        <button id="teambtn" class="deselectedbtn" onclick="topmenubtnpressed('teams')" style="display:none;">Teams View</button>
+        <button id="playerbtn" class="deselectedbtn" onclick="topmenubtnpressed('players')" style="display:none;">Player View</button></div>
+            <div id="topmenu-right"></div>
+        </div>
+    
+      <div id="SecondMenu">
+        <label for="secondmenuleagueslct" id="secondmenuleagueslctlabel" style="display:none">Focus on specific league: </label>
+        <select id="secondmenuleagueslct" size=1 style="display:none" onchange="secondmenuleaguesupdated()"></select>
+        
+        <label for="secondmenuteamslct" id="secondmenuteamslctlabel" style="display:none"> and a specific team: </label>
+        <select id="secondmenuteamslct" size=1 style="display:none" onchange="secondmenuteamupdated()"></select>
+    </div>
+    
+        <div id="LowerUI">
+            <div id="Panel1"><select id="panel1select" class="selectbox" style="display:none;" onchange="panel1selectionmade(this.value)"></select></div>
+            
+            <div id="Panel2">
+            
+                <div id="leaguespanel" style="display:none">
+                    <div id="leaguespanel-topcontainer">
+                
+                    <div id="leagues_topleft">
+                        
+                    <table>
+                    
+                    <tr>
+                        <td>League Name</td>
+                        <td><input id="league_leaguename" type="text" oninput="fieldupdate(this.id, this.value)"></td>
+                    </tr>
+                    <tr>
+                        <td>League ID</td>
+                        <td><input id="league_leagueid" type="number" step=1 disabled=true></td>
+                    </tr>
+                    <tr>
+                        <td>Country ID</td>
+                        <td><input id="league_countryid" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td>
+                    </tr>
+                    <tr>
+                        <td>Country</td>
+                        <td><input id="league_country" type="text" readonly=true style="background-color: rgba(232, 232, 232,1)"></td>
+                    </tr>
+                    <tr>
+                        <td>League Level</td>
+                        <td><input id="league_level" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td>
+                    </tr>
+                    <tr>
+                        <td>Time Slice</td>
+                        <td><input id="league_timeslice" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td>
+                    </tr>
+                    <tr>
+                        <td>Womens</td>
+                        <td><input id="league_womens" type="checkbox" onchange="fieldupdate(this.id)"></td>
+                    </tr>			
+                    
+                    </table>	 
+                    </div>
+                    
+                    <div id="leagues_topright">
+                        <table>
+                        <tr>
+                            <td>Scarf Enabled</td>
+                            <td><input id="league_scarfenabled" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td>
+                        </tr>
+                        <tr>
+                            <td>Banner Enabled</td>
+                            <td><input id="league_bannerenabled" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td>
+                        </tr>
+                        <tr>
+                            <td>Pole Flag Enabled</td>
+                            <td><input id="league_poleflagenabled" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td>
+                        </tr>
+                        <tr>
+                            <td>Crowd Cards Enabled</td>
+                            <td><input id="league_crowdcardsenabled" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td>
+                        </tr>
+                        </table>
+                    </div>
+                    
+                    </div>
+                    <div id="leaguespanel-bottom">
+                        <table id=leagueteamlinks-tablecontainer>
+                            <th>Teams in this league</th>
+                            <th></th>
+                            <th>Teams in other league</th>
+                            <tr>
+                                <td><select id="leagueteamlinks"></select></td>
+                                <td><button onclick="moveteamtoleague('to')">  Move to league →  </button><br><button onclick="moveteamtoleague('from')">  ← Move from league  </button><br><select id="leagueopts" onchange="showotherleagueteamlist(this.value)"></select></td>
+                                <td><select id="otherleagueteamlinks"></select></td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                </div>
+                
+                <div id="teamspanel" style="display:none">
+                    <div id="teamspanel-topcontainer">
+                    
+                    <div id="teamspanel-topleft">
+                    <table>
+                    
+                        <tr><td>Team ID </td><td><input id="team_teamid" type="number" step=1 oninput="fieldupdate(this.id, this.value)" disabled=true></td></tr>
+                        <tr><td>Team Name </td><td><input id="team_teamname" type="text" oninput="fieldupdate(this.id, this.value)"></td></tr>
+                        <tr><td>Founded in </td><td><input id="team_foundationyear" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                        <tr><td>Club Worth </td><td><input id="team_clubworth" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                        <tr><td>Profitability </td><td><input id="team_profitability" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                        <tr><td>Domestic Prestige </td><td><input id="team_domesticprestige" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                        <tr><td>International Prestige </td><td><input id="team_internationalprestige" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>	
+                        <tr><td>Popularity </td><td><input id="team_popularity" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                        <tr><td>Youth Development </td><td><input id="team_youthdevelopment" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                        <tr><td>Rival </td><td><select id="team_rivalteam" onchange="fieldupdate(this.id, this.value)"></select></td></tr>
+                            
+                    </table>
+                    
+                    
+                    </div>
+                    
+                    <div id="teamspanel-topright">
+                        <table>
+                    
+                        <tr><td>Colors </td><td><input id="team_maincolor" type="color" oninput="fieldupdate(this.id, this.value)"><input id="team_secondarycolor" type="color" oninput="fieldupdate(this.id, this.value)"><input id="team_tertiarycolor" type="color" oninput="fieldupdate(this.id, this.value)"></td></tr>				
+                        <tr><td>Ball ID </td><td><input id="team_ballid" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                        <tr><td>Ethnicity </td><td><input id="team_ethnicity" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                        <tr><td>Crowd Region </td><td><input id="team_crowdregion" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                        <tr><td>Crowd Skintone </td><td><input id="team_crowdskintonecode" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                        <tr><td>Stadium Capacity </td><td><input id="team_stadiumcapacity" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>		
+                    
+                    </table>
+                    </div>
+                    
+                    </div>
+                    
+                    <div id="teamspanel-bottom">
+                        
+                        <table id="teamplayerlinks-tablecontainer">
+                            <th>Players on this team</th>
+                            <th></th>
+                            <th>Players on other team</th>
+                            <tr>
+                                <td><select id="teamplayerlinks"></select></td>
+                                <td><button onclick="moveplayertoteam('to')">  Move to team →  </button><br><button onclick="moveplayertoteam('from')">  ← Move from team </button><br><select id="teamplayerlinks_leagueopts" onchange="loadonlyteamsinleague(this.value, 'teamplayerlinks')"></select><br><select id="teamplayerlinks_teamopts" onchange="showteamplayerlinks(this.value, 'otherteamplayerlinks')"></select></td>
+                                <td><select id="otherteamplayerlinks"></select></td>
+                            </tr>
+                        </table>
+                        
+                    </div>
+                </div>
+                
+                <div id="playerspanel" style="display:none">
+                    <div id="playerspanel-topcontainer">
+                    
+                    <div id="playerspanel-topleft">
+                    <table>
+                    
+                        <tr><td>Player ID </td><td><input id="player_playerid" type="number" step=1 oninput="fieldupdate(this.id, this.value)" disabled=true></td></tr>
+                        <tr><td>First Name</td><td><input id="player_firstname" type="text" oninput="fieldupdate(this.id, this.value)"></td></tr>
+                        <tr><td>Last Name</td><td><input id="player_lastname" type="text" oninput="fieldupdate(this.id, this.value)"></td></tr>
+                        <tr><td>Common Name</td><td><input id="player_commonname" type="text" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                        <tr><td>Jersey Name</td><td><input id="player_jerseyname" type="text" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                        <tr><td>Height</td><td><input id="player_height" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td><td id="player_heightimpirialdisplay">&nbsp;5ft 10in</td></tr>
+                        <tr><td>Weight</td><td><input id="player_weight" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td><td id="player_weightimpirialdisplay">&nbsp;150 lbs</td></tr>			
+                    </table>
+                            
+                    </div>
+                    <div id="playerspanel-topright">
+                        <table>
+                            <tr><td>Birthdate</td>
+                            <td>
+                            <input id="player_birthdate-day" type="number" min=1 max=31 step=1 onchange="fieldupdate(this.id, this.value)">
+                            <select id="player_birthdate-month" onchange="fieldupdate(this.id, this.value)">
+                                <option value=1>Jan</option>
+                                <option value=2>Feb</option>
+                                <option value=3>Mar</option>
+                                <option value=4>Apr</option>
+                                <option value=5>May</option>
+                                <option value=6>Jun</option>
+                                <option value=7>Jul</option>
+                                <option value=8>Aug</option>
+                                <option value=9>Sep</option>
+                                <option value=10>Oct</option>
+                                <option value=11>Nov</option>
+                                <option value=12>Dec</option>
+                            </select>
+                            <input id="player_birthdate-year" type="number" min=1582 max=2100 step=1 onchange="fieldupdate(this.id, this.value)">
+                        </td>
+                        </tr>
+                        <tr><td>Nationality</td><td><select id="player_nationality" onchange="fieldupdate(this.id, this.value)"></select></td></tr>
+                        <tr><td>Gender</td><td><select id="player_gender" onchange="fieldupdate(this.id, this.value)"><option value=0>Male</option><option value=1>Female</option></select></td></tr>
+                        <tr><td>Foot </td><td><select id="player_foot" onchange="fieldupdate(this.id, this.value)"><option value=1>Left</option><option value=2>Right</option></select></td></tr>
+                        <tr><td>Weak Foot </td><td><select id="player_weakfoot" onchange="fieldupdate(this.id, this.value)"><option value=1>Terrible</option><option value=2>Bad</option><option value=3>Average</option><option value=4>Good</option><option value=5>Excellent</option></select></td></tr>
+                        <tr><td>Hair Color</td><td><select id="player_haircolor" onchange="fieldupdate(this.id, this.value)">
+                            <option value=0>{special}</option>
+                            <option value=21>Jet black</option>
+                            <option value=3>Black</option>
+                            <option value=8>Shiny black</option>
+                            <option value=9>Shiny dark with grey tips</option>
+                            <option value=22>Black with some mixed grey</option>
+                            <option value=23>Black with more mixed grey</option>
+                            <option value=20>Black with a brownish sheen</option>
+                            <option value=6>Darker brown</option>
+                            <option value=5>Brown</option>
+                            <option value=19>Light brown, almost blonde</option>
+                            <option value=13>Dark red</option>
+                            <option value=12>Dark auburn</option>
+                            <option value=18>Auburn</option>
+                            <option value=7>Red</option>
+                            <option value=26>Brownish red</option>
+                            <option value=27>Vibrant red</option>
+                            <option value=17>Strawberry blonde</option>
+                            <option value=1>Dirty blonde</option>
+                            <option value=15>Mostly blonde with dark layers</option>
+                            <option value=2>Blonde</option>
+                            <option value=4>Black with shiny gold tips</option>
+                            <option value=24>Black with blonde tips</option>
+                            <option value=16>Black hair dyed blonde</option>
+                        </select></td></tr>
+                        <tr><td>Skin Tone Code</td><td><input id="player_skintone" type="number" min=1 max=10 step=1 onchange="fieldupdate(this.id, this.value)"></td></tr>
+                        </table>
+                    </div>
+                    <div id="playerspanel-bottom" class="row">
+                            <div id="playerspanel-bottomleft" class="column">
+                                                    <table>
+                            <strong>Positions</strong>
+                            <tr>
+                            <td>
+                                <select id="player_position1" onchange="fieldupdate(this.id, this.value)">
+                                    <option value="-1">{none}</option>
+                                    <option value="0">GK</option>
+                                    <option value="1">SW</option>
+                                    <option value="2">RWB</option>
+                                    <option value="3">RB</option>
+                                    <option value="4">RCB</option>
+                                    <option value="5">CB</option>
+                                    <option value="6">LCB</option>
+                                    <option value="7">LB</option>
+                                    <option value="8">LWB</option>
+                                    <option value="9">RDM</option>
+                                    <option value="10">CDM</option>
+                                    <option value="11">LDM</option>
+                                    <option value="12">RM</option>
+                                    <option value="13">RCM</option>
+                                    <option value="14">CM</option>
+                                    <option value="15">LCM</option>
+                                    <option value="16">LM</option>
+                                    <option value="17">RAM</option>
+                                    <option value="18">CAM</option>
+                                    <option value="19">LAM</option>
+                                    <option value="20">RF</option>
+                                    <option value="21">CF</option>
+                                    <option value="22">LF</option>
+                                    <option value="23">RW</option>
+                                    <option value="24">RS</option>
+                                    <option value="25">ST</option>
+                                    <option value="26">LS</option>
+                                    <option value="27">LW</option>
+                                </select>
+                                </td>
+                            <td>
+                                <select id="player_position2" onchange="fieldupdate(this.id, this.value)">
+                                    <option value="-1">{none}</option>
+                                    <option value="0">GK</option>
+                                    <option value="1">SW</option>
+                                    <option value="2">RWB</option>
+                                    <option value="3">RB</option>
+                                    <option value="4">RCB</option>
+                                    <option value="5">CB</option>
+                                    <option value="6">LCB</option>
+                                    <option value="7">LB</option>
+                                    <option value="8">LWB</option>
+                                    <option value="9">RDM</option>
+                                    <option value="10">CDM</option>
+                                    <option value="11">LDM</option>
+                                    <option value="12">RM</option>
+                                    <option value="13">RCM</option>
+                                    <option value="14">CM</option>
+                                    <option value="15">LCM</option>
+                                    <option value="16">LM</option>
+                                    <option value="17">RAM</option>
+                                    <option value="18">CAM</option>
+                                    <option value="19">LAM</option>
+                                    <option value="20">RF</option>
+                                    <option value="21">CF</option>
+                                    <option value="22">LF</option>
+                                    <option value="23">RW</option>
+                                    <option value="24">RS</option>
+                                    <option value="25">ST</option>
+                                    <option value="26">LS</option>
+                                    <option value="27">LW</option>
+                                </select>
+                                </td>
+                                <td>
+                                <select id="player_position3" onchange="fieldupdate(this.id, this.value)">
+                                    <option value="-1">{none}</option>
+                                    <option value="0">GK</option>
+                                    <option value="1">SW</option>
+                                    <option value="2">RWB</option>
+                                    <option value="3">RB</option>
+                                    <option value="4">RCB</option>
+                                    <option value="5">CB</option>
+                                    <option value="6">LCB</option>
+                                    <option value="7">LB</option>
+                                    <option value="8">LWB</option>
+                                    <option value="9">RDM</option>
+                                    <option value="10">CDM</option>
+                                    <option value="11">LDM</option>
+                                    <option value="12">RM</option>
+                                    <option value="13">RCM</option>
+                                    <option value="14">CM</option>
+                                    <option value="15">LCM</option>
+                                    <option value="16">LM</option>
+                                    <option value="17">RAM</option>
+                                    <option value="18">CAM</option>
+                                    <option value="19">LAM</option>
+                                    <option value="20">RF</option>
+                                    <option value="21">CF</option>
+                                    <option value="22">LF</option>
+                                    <option value="23">RW</option>
+                                    <option value="24">RS</option>
+                                    <option value="25">ST</option>
+                                    <option value="26">LS</option>
+                                    <option value="27">LW</option>
+                                </select>
+                                </td>
+                                <td>
+                                <select id="player_position4" onchange="fieldupdate(this.id, this.value)">
+                                    <option value="-1">{none}</option>
+                                    <option value="0">GK</option>
+                                    <option value="1">SW</option>
+                                    <option value="2">RWB</option>
+                                    <option value="3">RB</option>
+                                    <option value="4">RCB</option>
+                                    <option value="5">CB</option>
+                                    <option value="6">LCB</option>
+                                    <option value="7">LB</option>
+                                    <option value="8">LWB</option>
+                                    <option value="9">RDM</option>
+                                    <option value="10">CDM</option>
+                                    <option value="11">LDM</option>
+                                    <option value="12">RM</option>
+                                    <option value="13">RCM</option>
+                                    <option value="14">CM</option>
+                                    <option value="15">LCM</option>
+                                    <option value="16">LM</option>
+                                    <option value="17">RAM</option>
+                                    <option value="18">CAM</option>
+                                    <option value="19">LAM</option>
+                                    <option value="20">RF</option>
+                                    <option value="21">CF</option>
+                                    <option value="22">LF</option>
+                                    <option value="23">RW</option>
+                                    <option value="24">RS</option>
+                                    <option value="25">ST</option>
+                                    <option value="26">LS</option>
+                                    <option value="27">LW</option>
+                                </select>
+                                </td>
+                                
+                                </tr>
+                            </table>
+                            <br>
+                            <table>
+                            <strong>Work Rate</strong>
+                            <tr><td>Def Work Rate</td><td><input id="player_defworkrate" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                            <tr><td>Att Work Rate</td><td><input id="player_attworkrate" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                        
+                        </table>
+                        <br>
+                            <table>
+                                <strong>Goalkeeping</strong>
+                                <tr><td>Diving</td><td><input id="player_gkdiving" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Reflexes</td><td><input id="player_gkreflexes" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Handling</td><td><input id="player_gkhandling" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Kicking</td><td><input id="player_gkkicking" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Positioning</td><td><input id="player_gkpositioning" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                
+                            </table>
+                            <br>
+                            <table>
+                                <strong>Defensive</strong>
+                                <tr><td>Interceptions</td><td><input id="player_interceptions" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>								
+                                <tr><td>Sliding Tackle</td><td><input id="player_slidingtackle" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>								
+                                <tr><td>Standing Tackle</td><td><input id="player_standingtackle" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Def. Awareness</td><td><input id="player_defawareness" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                            </table>
+    
+                    </div>
+                          <div id="playerspanel-bottomright" class="column">
+                                <div id="player_attributedefensive">
+                            
+                        </div>
+                                <div id="player_attributescontrol">
+                            <table>
+                                <strong>Control</strong>
+                                <tr><td>Heading</td><td><input id="player_heading" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Ball Control</td><td><input id="player_ballcontrol" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Dribbling</td><td><input id="player_dribbling" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Curve</td><td><input id="player_curve" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Volleys</td><td><input id="player_volleys" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Crossing</td><td><input id="player_crossing" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Short Passing</td><td><input id="player_shortpassing" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Long Passing</td><td><input id="player_longpassing" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                            </table>
+                            </div>
+                                <div id="player_attributesshooting"><br>
+                            <table>
+                                <strong>Shooting</strong>
+                                <tr><td>Finishing</td><td><input id="player_finishing" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Long Shots</td><td><input id="player_longshots" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Shot Power</td><td><input id="player_shotpower" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Free Kicks</td><td><input id="player_freekicks" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Penalties</td><td><input id="player_penalties" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                
+                            </table>
+                            
+                        </div>
+                                
+                    </div>
+                            <div id="playerspanel-bottomcentral" class="column">
+                                    <div id="player_attributesgoalkeeping">
+                        
+                            </div>
+                                    <div id="player_attributesphysical">
+                            <table>
+                                <strong>Physical</strong>
+                                <tr><td>Sprint Speed</td><td><input id="player_sprintspeed" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Acceleration</td><td><input id="player_acceleration" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Stamina</td><td><input id="player_stamina" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Agility</td><td><input id="player_agility" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Balance</td><td><input id="player_balance" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Strength</td><td><input id="player_strength" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Jumping</td><td><input id="player_jumping" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                            </table>
+                        </div>
+                                    <div id="player_attributesmental">
+                                    <br>
+                            <table>
+                                <strong>Mental</strong>
+                                <tr><td>Aggression</td><td><input id="player_aggression" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Composure</td><td><input id="player_composure" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Positioning</td><td><input id="player_positioning" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Reactions</td><td><input id="player_reactions" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                                <tr><td>Vision</td><td><input id="player_vision" type="number" step=1 oninput="fieldupdate(this.id, this.value)"></td></tr>
+                            </table>
+                        </div>
+                            </div>
+                    </div>	
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

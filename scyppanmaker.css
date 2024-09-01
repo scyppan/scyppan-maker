@@ -1,0 +1,178 @@
+#UICONTAINER{
+    display: inline;
+    font-size: 14px;
+}
+
+#TopMenu{
+    width: 100%;
+    height: 22px;
+    display: flex;
+}
+
+#topmenu-left{
+    width: 75%;
+    height: 100%;
+    background-color: rgba(230, 229, 193, 1);
+}
+
+#topmenu-right{
+    background-color: rgba(229, 197, 235, 1);
+    font-size: 10px;
+    width: 25%;
+    height: 100%;
+}
+
+#SecondMenu{
+    background-color: rgba(203, 212, 205, 1);
+    width: 100%;
+    height: 22px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+#LowerUI{
+    display: flex;
+}
+
+#Panel1{
+    background-color: rgba(242, 234, 233, 1);
+    width: 17.5%;
+    height: 5000px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    
+}
+
+#Panel2{
+    background-color: rgba(203, 212, 205, 1);
+    width: 82.5%;
+    height: 5000px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    
+}
+
+#leaguespanel-topcontainer{
+    display: flex;
+}
+
+#leagueteamlinks-tablecontainer td{
+    padding: 0, 25;
+    text-align: center;
+}
+
+#teamplayerlinks-tablecontainer td{
+    padding: 0, 25;
+    text-align: center;
+}
+
+#leagues_topleft{
+    width: 50%;
+    height: 200px;
+    background-color: rgba(218, 228, 235, 1);
+    float: left;
+}
+
+#leagues_topright{
+    width: 50%;
+    height: 200px;
+    background-color: rgba(229, 197, 235, 1);
+    float: right;
+}
+
+#leaguespanel-bottom{
+    width: 100%;
+    height: 600px;
+    background-color: rgba(255, 220, 220, 1);
+}
+
+#teamspanel-topcontainer{
+    display: flex;
+}
+
+#teamspanel-topleft{
+    width: 50%;
+    height: 250px;
+    background-color: rgba(218, 228, 235, 1);
+    float: left;
+}
+
+#teamspanel-topright{
+    width: 50%;
+    height: 250px;
+    background-color: rgba(229, 197, 235, 1);
+    float: right;
+}
+
+#teamspanel-bottom{
+    width: 100%;
+    height: 600px;
+    background-color: rgba(255, 220, 220, 1);
+}
+
+#playerspanel-topleft{
+    width: 50%;
+    height: 200px;
+    background-color: rgba(218, 228, 235, 1);
+    float: left;
+}
+
+#playerspanel-topright{
+    width: 50%;
+    height: 200px;
+    background-color: rgba(229, 197, 235, 1);
+    float: right;
+}
+
+#playerspanel-bottomleft{
+    width: 30%;
+    height: 500px;
+    background-color: rgba(199, 197, 225, 1);
+    float: left;
+}
+
+#playerspanel-bottomcentral{
+    width: 35%;
+    height: 500px;
+    background-color: rgba(210, 164, 164, 1);
+    float: right;
+}
+
+#playerspanel-bottomright{
+    width: 35%;
+    height: 500px;
+    background-color: rgba(145, 200, 164, 1);
+    float: right;
+}
+
+.namedisplay{
+    text-align: center;
+}
+
+.selectedbtn{
+    background: #e0e0c3;
+}
+
+.deselectedbtn{
+    background: #f0f0f0;
+}
+
+.selectbox{
+    background: #ffffff;
+    width: 100%;
+}
+
+.selectoption{
+    background: #f2eae9;
+}
+
+.column {
+    float: left;
+    width: 33.33%;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
